@@ -7,11 +7,40 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main>
-    <h1>WeatherFit</h1>
-    <p>Skeleton: main screen coming soon.</p>
-    <a href="info.html">Info</a>
-  </main>
+  <div class="screen">
+    <!-- Top bar: location (left) and date (right) controls -->
+    <header class="top-bar">
+      <button type="button" class="control" id="location-button">Austin, TX</button>
+      <button type="button" class="control" id="date-button">Today</button>
+    </header>
+
+    <!-- Temperature, condition, and context line (Req 16) -->
+    <section class="conditions" aria-label="Weather conditions">
+      <p class="temp">72°F</p>
+      <p class="condition">Partly cloudy</p>
+      <p class="context">Today (current) · Weather: Open-Meteo</p>
+    </section>
+
+    <!-- Character is the focus of the screen -->
+    <section class="character" aria-label="Outfit recommendation">
+      <svg class="character-art" role="img" aria-label="Placeholder character in a light outfit" viewBox="0 0 200 260">
+        <circle cx="100" cy="45" r="30" fill="none" stroke="currentColor" stroke-width="4"/>
+        <path d="M100 75 V170 M100 100 L50 135 M100 100 L150 135 M100 170 L60 235 M100 170 L140 235"
+              fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </section>
+
+    <p class="recommendation" id="recommendation">A light layer and comfy pants will do it today.</p>
+
+    <div class="reminder" role="note">
+      <span class="reminder-icon" aria-hidden="true">⚠</span>
+      <span id="reminder-text">Reminder: put on sunscreen before heading out.</span>
+    </div>
+
+    <footer class="bottom-bar">
+      <a class="control info-link" href="info.html" aria-label="Info">(i) Info</a>
+    </footer>
+  </div>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

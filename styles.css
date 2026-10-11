@@ -1,12 +1,100 @@
 /* Shared styles for index.html and info.html */
+:root {
+  --ink: #2b2b2b;
+  --paper: #fbfaf6;
+  --line: #2b2b2b;
+  --accent-bg: #fff3c4;
+  --gap: 0.75rem;
+}
+
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  line-height: 1.5;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--paper);
 }
 
-main {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 1rem;
+/* Interactive elements: at least 44x44px, visible focus ring */
+.control {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
 }
+
+:focus-visible {
+  outline: 3px solid #0b57d0;
+  outline-offset: 2px;
+}
+
+/* Main screen, phone: single column filling the viewport */
+.screen {
+  min-height: 100dvh;
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: var(--gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.conditions { text-align: center; }
+.conditions p { margin: 0; }
+.temp { font-size: 2.5rem; font-weight: 700; }
+.condition { font-size: 1.1rem; border-top: 2px solid var(--line); display: inline-block; padding-top: 0.15rem; }
+.context { font-size: 0.85rem; margin-top: 0.25rem !important; }
+
+/* Character panel takes the remaining height */
+.character {
+  flex: 1 1 auto;
+  min-height: 14rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--line);
+  border-radius: 0.8rem;
+}
+
+.character-art { height: 100%; max-height: 22rem; width: auto; color: var(--ink); }
+
+.recommendation {
+  margin: 0;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.reminder {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--accent-bg);
+  border: 2px solid var(--line);
+  border-radius: 0.6rem;
+}
+
+.reminder-icon { font-size: 1.4rem; }
+
+/* Info button sits at the bottom-left for one-handed thumb reach */
+.bottom-bar { display: flex; justify-content: flex-start; }
+
+/* Info screen (info.html) */
+main { max-width: 40rem; margin: 0 auto; padding: 1rem; }
