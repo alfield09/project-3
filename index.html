@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Pencil-wobble filter used by .sketch borders and the character drawing -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4"/>
+    </filter>
+  </svg>
   <div class="screen">
     <!-- Top bar: location (left) and date (right) controls -->
     <header class="top-bar">
@@ -24,9 +31,19 @@
     <!-- Character is the focus of the screen -->
     <section class="character" aria-label="Outfit recommendation">
       <svg class="character-art" role="img" aria-label="Placeholder character in a light outfit" viewBox="0 0 200 260">
-        <circle cx="100" cy="45" r="30" fill="none" stroke="currentColor" stroke-width="4"/>
-        <path d="M100 75 V170 M100 100 L50 135 M100 100 L150 135 M100 170 L60 235 M100 170 L140 235"
-              fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
+          <!-- head, hair, face -->
+          <path d="M100 18 C132 16 140 52 118 70 C100 82 70 74 68 48 C66 30 82 20 100 18 Z"/>
+          <path d="M72 38 C84 24 112 24 128 38"/>
+          <path d="M88 48 v4 M112 48 v4"/>
+          <path d="M90 62 Q100 70 110 62"/>
+          <!-- light layer: loose top with sleeves -->
+          <path d="M78 84 C90 90 110 90 122 84 L152 108 L140 130 L124 118 L126 168 L74 168 L76 118 L60 130 L48 108 Z"/>
+          <!-- comfy pants -->
+          <path d="M74 168 L70 238 L94 238 L100 190 L106 238 L130 238 L126 168"/>
+          <!-- shoes -->
+          <path d="M66 242 L96 242 M104 242 L134 242"/>
+        </g>
       </svg>
     </section>
 

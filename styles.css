@@ -139,3 +139,34 @@ main { max-width: 40rem; margin: 0 auto; padding: 1rem; }
   }
   .day { flex: 1 1 0; text-align: center; }
 }
+
+/* Hand-drawn look: handwriting font + pencil-wobbled borders */
+@font-face {
+  font-family: "Patrick Hand";
+  src: url("assets/fonts/PatrickHand-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+body { font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif; font-size: 1.15rem; }
+
+/* Border moves to a pseudo-element so the wobble filter distorts the line, not the text */
+.control,
+.character,
+.reminder {
+  position: relative;
+  border: none;
+}
+
+.control::before,
+.character::before,
+.reminder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid var(--line);
+  border-radius: inherit;
+  filter: url(#rough);
+  pointer-events: none;
+}
+
+.condition { border-top-width: 2.5px; }
