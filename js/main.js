@@ -63,3 +63,37 @@ function chooseLocation(match) {
   showLocation();
   dialog.close();
 }
+
+// Device location: only requested when the user taps the button, never on page load (Req 1).
+const geolocateButton = document.getElementById("geolocate-button");
+const MANUAL_FALLBACK = "You can still search for a US city or ZIP code above.";
+
+geolocateButton.addEventListener("click", () => {
+  if (!navigator.geolocation) {
+    showGeolocationProblem(`Your browser doesn't support device location. ${MANUAL_FALLBACK}`);
+    return;
+  }
+  message.textContent = "Finding your location…";
+  resultsList.replaceChildren();
+  navigator.geolocation.getCurrentPosition(
+    (position) => chooseLocation({
+      // Open-Meteo has no reverse geocoding, so a device location has no place name
+      label: "Current location",
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    }),
+    (error) => {
+      const reason = error.code === error.PERMISSION_DENIED
+        ? "Location permission was denied."
+        : "We couldn't get your device location.";
+      showGeolocationProblem(`${reason} ${MANUAL_FALLBACK}`);
+    },
+    { timeout: 10000 },
+  );
+});
+
+// Req 11: explain the problem and fall back to manual entry; never fail silently
+function showGeolocationProblem(text) {
+  message.textContent = text;
+  input.focus();
+}

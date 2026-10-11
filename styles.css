@@ -215,6 +215,7 @@ dialog p { margin: var(--gap) 0 0.5rem; }
 
 .result { width: 100%; justify-content: flex-start; text-align: left; }
 #location-close { margin-top: var(--gap); }
+#geolocate-button { width: 100%; margin-bottom: var(--gap); }
 
 @media (min-width: 900px) {
   dialog { margin: auto; border-radius: 0.8rem; }

@@ -162,6 +162,8 @@ Record features intentionally excluded from this project.
 
 After implementation or testing, record requirement changes and the evidence that prompted them. Update the screen drawings when a material layout or interaction changes.
 
+- 2026-10-11: Req 16 (place name) — a location from device geolocation is labeled "Current location" instead of a place name. Evidence: Open-Meteo has no reverse-geocoding endpoint, and the alternative (a second service) would send coordinates to another third party. Developer chose the "Current location" label. Manually entered locations still show "City, ST".
+
 ## Approval
 
 The Developer reviews and explicitly approves this specification and its screen designs before planning begins.
