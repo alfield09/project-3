@@ -56,7 +56,7 @@ Record each useful source, what it supports, and important limitations. Research
 
 **Sunscreen reminder threshold — UV Index** ([WHO UV Index guide](https://www.who.int/news-room/questions-and-answers/item/radiation-the-ultraviolet-(uv)-index); [ICNIRP/WHO Global Solar UV Index practical guide](https://www.icnirp.org/cms/upload/publications/ICNIRPWHOSolarUVI.pdf)). UV Index 0–2 = low, minimal protection needed; 3+ is the widely-used threshold at which sun protection (sunscreen, hat, shade) is recommended. Supports triggering a sunscreen reminder at UV ≥ 3.
 
-**Hydration reminder threshold — Heat Index** ([NWS heat safety notices](https://www.weather.gov/media/notification/pdfs/pns12heat_aaa.pdf)). NWS heat index categories: Caution 80–90°F, Extreme Caution 90–103°F (fatigue possible with prolonged exposure), Danger 103–124°F. Supports triggering a hydration reminder at heat index ≥ 90°F.
+**Hydration reminder threshold — Heat Index** ([NWS heat safety notices](https://www.weather.gov/media/notification/pdfs/pns12heat_aaa.pdf)). NWS heat index categories: Caution 80–90°F, Extreme Caution 90–103°F (fatigue possible with prolonged exposure), Danger 103–124°F. Supports triggering a hydration reminder at heat index ≥ 90°F. *Implementation note: Open-Meteo does not provide the NWS heat index, so the app uses its feels-like (apparent) temperature as a proxy at the same 90°F threshold; this is disclosed on the info screen.*
 
 **Umbrella reminder threshold — Probability of Precipitation (PoP)** ([NWS PoP explainer](https://www.weather.gov/media/pah/WeatherEducation/pop.pdf); [govfacts.org](https://govfacts.org/government/federal/agencies/commerce/noaa/what-do-precipitation-percentages-in-weather-forecasts-actually-mean/)). PoP is the statistical chance of measurable precipitation (≥0.01in). General guidance: 30–40% is "worth keeping an umbrella handy," 60%+ is "plan for rain." Supports triggering an umbrella reminder at PoP ≥ 40%. Limitation: PoP thresholds for umbrella-carrying are a social convention, not a scientific standard — different sources suggest anywhere from 40% to 60%.
 
@@ -76,7 +76,7 @@ Record the selected weather provider, forecast range, recommendation categories 
 
 **Recommendation categories and rules:**
 - Outfit categories by temperature: Cold (below 45°F), Cool (45–60°F), Mild (60–75°F), Hot (75°F+). Each category needs 3 outfit-art variations chosen at random.
-- Reminders (triggered independently of outfit category, each with 3 wording variations): Umbrella at PoP ≥ 40%; Sunscreen at UV Index ≥ 3; Hydration at Heat Index ≥ 90°F.
+- Reminders (triggered independently of outfit category, each with 3 wording variations): Umbrella at PoP ≥ 40%; Sunscreen at UV Index ≥ 3; Hydration at feels-like temperature ≥ 90°F (proxy for Heat Index).
 - Trade-off: thresholds are synthesized from general apparel/safety guidance (see Weather and technical evidence), not campus-specific data — they may need adjustment after peer usability testing.
 
 **Visual direction:** Sketched/hand-drawn illustration style, applied to the character and outfits *and* the surrounding interface (icons, buttons, weather/reminder icons) — not just the character art, inspired by reference images 1–6. Trade-off: this is a larger art workload than a flat-vector UI (like Carrot/WeatherFit, references 7–11), since every interface element needs custom sketched art rather than reusable icon sets or UI-kit components.

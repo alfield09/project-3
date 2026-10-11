@@ -65,7 +65,7 @@ Summarize the structure, data flow, dependencies, task order, and main risks.
 - [ ] Implement date selection (today + up to 7 forecast days)
 - [ ] Fetch current and forecast weather data from Open-Meteo for the selected location/date
 - [ ] Implement the recommendation-state logic (outfit category, reminder thresholds) per `spec.md`
-- [ ] Implement independently-randomized outfit and reminder wording variation, seeded per location+date
+- [ ] Implement independently-randomized outfit and reminder wording variation, rolled once and stored per location+date
 - [ ] Implement localStorage persistence for most-recent location and per-date recommendation state
 - [ ] Swap in the real AI-generated art assets for the character, outfits, and icons
 - [ ] Implement the hidden Halloween outfit (double-tap easter egg)
