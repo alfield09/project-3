@@ -98,3 +98,44 @@ body {
 
 /* Info screen (info.html) */
 main { max-width: 40rem; margin: 0 auto; padding: 1rem; }
+
+/* Forecast strip is laptop-only */
+.forecast-strip { display: none; }
+
+.day[aria-pressed="true"] { background: var(--accent-bg); }
+
+/* Main screen, laptop: left text column, character center, reminder right, 7-day strip along the bottom */
+@media (min-width: 900px) {
+  .screen {
+    max-width: 72rem;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "top       top       info"
+      "cond      character reminder"
+      "rec       character reminder"
+      "strip     strip     strip";
+    gap: 1.25rem;
+  }
+
+  .top-bar { grid-area: top; justify-content: flex-start; }
+  .bottom-bar { display: contents; }
+  .info-link { grid-area: info; justify-self: end; align-self: start; }
+
+  /* Temp/condition and the recommendation stack in the left column */
+  .conditions { grid-area: cond; text-align: left; align-self: start; }
+  .recommendation { grid-area: rec; align-self: start; text-align: left; font-size: 1.35rem; }
+
+  .character { grid-area: character; min-height: 24rem; }
+  .reminder { grid-area: reminder; align-self: start; }
+
+  .forecast-strip {
+    grid-area: strip;
+    display: flex;
+    gap: var(--gap);
+    padding-top: 1rem;
+    border-top: 2px solid var(--line);
+  }
+  .day { flex: 1 1 0; text-align: center; }
+}
