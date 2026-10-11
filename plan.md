@@ -61,9 +61,9 @@ Summarize the structure, data flow, dependencies, task order, and main risks.
 - [x] Scaffold the project (`index.html`, `info.html`, `styles.css`, `js/` modules, `assets/` folder)
 - [x] Verify the Open-Meteo fields: one real call each to the geocoding and forecast APIs, confirming the fields in "Weather fields" exist and results can be limited to the US
 - [x] Deploy the scaffolded skeleton to GitHub Pages (public HTTPS) and confirm it loads; redeploy at each later checkpoint
-- [ ] Build the main screen's static layout for phone, using placeholder art, matching IMG_0205
-- [ ] Build the main screen's static layout for laptop, using placeholder art, matching IMG_0204
-- [ ] Build the info screen's static layout (shared across phone/laptop), matching IMG_0206
+- [x] Build the main screen's static layout for phone, using placeholder art, matching IMG_0205
+- [x] Build the main screen's static layout for laptop, using placeholder art, matching IMG_0204
+- [x] Build the info screen's static layout (shared across phone/laptop), matching IMG_0206
 - [ ] Implement manual location entry with geocoding (Open-Meteo Geocoding API)
 - [ ] Implement device geolocation entry, requested only on explicit user action
 - [ ] Implement date selection (today + up to 7 forecast days)
