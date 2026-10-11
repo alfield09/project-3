@@ -39,44 +39,49 @@ Summarize the structure, data flow, dependencies, task order, and main risks.
 
 **Data flow:** user location/date input → geocode (if manual entry) → fetch Open-Meteo forecast → compute recommendation state → store in localStorage keyed by location+date → render character art, weather icon, written text, and reminders from that one state object.
 
+**Weather fields:** Today uses `current` temperature; forecast dates use daily `temperature_2m_max`. UV, precipitation probability, and feels-like all use daily max (`uv_index_max`, `precipitation_probability_max`, `apparent_temperature_max`). Feels-like is a proxy for the NWS heat index and is disclosed as such on the info screen.
+
 **Dependencies:** Open-Meteo weather API, Open-Meteo Geocoding API, browser Geolocation API, localStorage. No npm packages required.
 
 **Task order:** static layout first (both screens, both screen sizes) using placeholder art and mock data, then wire up real weather data, then recommendation logic and content variation, then persistence, then error/loading/permission states, then accessibility pass, then deploy, then usability testing.
 
-**Main risks:** Open-Meteo Geocoding API may return ambiguous matches for common city names (needs a disambiguation step, e.g. showing state alongside city); AI-generated art taking longer than expected if initial generations don't match the sketched style consistently; localStorage key design needs to handle both "today" (which changes meaning day-to-day) and fixed forecast dates without collisions.
+**Main risks:** Open-Meteo Geocoding API may return ambiguous matches for common city names (needs a disambiguation step, e.g. showing state alongside city); AI-generated art taking longer than expected if initial generations don't match the sketched style consistently; localStorage key design needs to handle both "today" (which changes meaning day-to-day) and fixed forecast dates without collisions, so keys use the calendar date, never the word "today"; feels-like is only a proxy for the NWS heat index, so the info screen must say so.
 
 ## Checklist
 
 ### Approvals
 
-- [ ] Research approved
-- [ ] Specification approved
-- [ ] Plan approved
+- [x] Research approved
+- [x] Specification approved
+- [x] Plan approved
 
 ### Build
 
 - [ ] Create or source the assets listed in `spec.md`, starting early
 - [ ] Scaffold the project (`index.html`, `info.html`, `styles.css`, `js/` modules, `assets/` folder)
+- [ ] Verify the Open-Meteo fields: one real call each to the geocoding and forecast APIs, confirming the fields in "Weather fields" exist and results can be limited to the US
+- [ ] Deploy the scaffolded skeleton to GitHub Pages (public HTTPS) and confirm it loads; redeploy at each later checkpoint
 - [ ] Build the main screen's static layout for phone, using placeholder art, matching IMG_0205
 - [ ] Build the main screen's static layout for laptop, using placeholder art, matching IMG_0204
 - [ ] Build the info screen's static layout (shared across phone/laptop), matching IMG_0206
 - [ ] Implement manual location entry with geocoding (Open-Meteo Geocoding API)
 - [ ] Implement device geolocation entry, requested only on explicit user action
 - [ ] Implement date selection (today + up to 7 forecast days)
-- [ ] Fetch current and forecast weather data from Open-Meteo for the selected location/date
-- [ ] Implement the recommendation-state logic (outfit category, reminder thresholds) per `spec.md`
+- [ ] Fetch current and forecast weather data from Open-Meteo for the selected location/date (today = current temperature; forecast = daily high; UV, PoP, feels-like = daily max)
+- [ ] Implement the recommendation-state logic per `spec.md`: Cold ≤44, Cool 45–59, Mild 60–74, Hot ≥75 (rounded °F); umbrella PoP ≥40, sunscreen UV ≥3, hydration feels-like ≥90
+- [ ] Show the main-screen context (Req 16): place name, "Today (current)" / "Forecast" label, °F, and the "Weather: Open-Meteo" credit
 - [ ] Implement independently-randomized outfit and reminder wording variation, rolled once and stored per location+date
 - [ ] Implement localStorage persistence for most-recent location and per-date recommendation state
 - [ ] Swap in the real AI-generated art assets for the character, outfits, and icons
-- [ ] Implement the hidden Halloween outfit (double-tap easter egg)
-- [ ] Implement loading, API-error/retry, and denied-geolocation-permission states
+- [ ] Implement the hidden Halloween outfit (double-tap, double-click, and Enter/Space twice within 500 ms)
+- [ ] Implement loading, API-error/retry, denied-geolocation-permission, location-not-found/non-US (Req 10a), and partial-data (missing UV or PoP = no reminder) states
 - [ ] Fill in the info screen's real content (creator, data source, methodology, privacy, art credits)
-- [ ] Pass an accessibility check (touch-target size, contrast) on both screens and sizes
+- [ ] Pass an accessibility check (44×44px targets, 3:1 control and 4.5:1 text contrast, keyboard operation with visible focus, alt text) on both screens and sizes
 - [ ] Use the approved screen drawings to guide layout and interaction work
 - [ ] Keep one recommendation state driving every visual and written output
 - [ ] Test and fix each checkpoint against the specification before starting the next
 - [ ] Commit meaningful working checkpoints
-- [ ] Deploy to a public HTTPS URL
+- [ ] Confirm the final build is deployed at the public HTTPS URL
 
 ### Verify and revise
 
@@ -84,6 +89,8 @@ Summarize the structure, data flow, dependencies, task order, and main risks.
 - [ ] Test multiple locations, current and forecast dates, recommendation categories, outfit and reminder variations, and failure states
 - [ ] Verify that eligible outfit and reminder variations are selected independently rather than as fixed pairs
 - [ ] Verify that returning to a previously selected date shows the same variations
+- [ ] Test an unknown location, a non-US location, and a response missing UV or PoP
+- [ ] Complete a keyboard-only pass (including the Halloween outfit) and a screen-reader pass
 - [ ] Test the deployed app, independently of the local version, on a real phone and a laptop, including both screens, accessibility, and one-handed controls
 - [ ] Prepare the usability test below
 - [ ] Test with three peers and record each session
@@ -115,6 +122,8 @@ Before testing, record the purpose, a few realistic tasks, non-leading prompts, 
 ## Revisions
 
 Record material plan changes and why they were made.
+
+- 2026-10-11: Aligned the plan with the finalized spec (feels-like temperature, band edges, Req 10a/13a/16, Halloween keyboard route, rolled-once-and-stored variations). Moved the first deploy to right after the scaffold so GitHub Pages/HTTPS problems surface early, and added an Open-Meteo field check before layout work.
 
 ## Saving transcripts
 
