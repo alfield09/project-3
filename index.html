@@ -70,6 +70,20 @@
       <a class="control info-link" href="info.html" aria-label="Info">(i) Info</a>
     </footer>
   </div>
+  <!-- Location picker: search a US city or ZIP, then choose a match (city shown with state) -->
+  <dialog id="location-dialog" aria-labelledby="location-title">
+    <h2 id="location-title">Choose a US location</h2>
+    <form id="location-form">
+      <label for="location-input">City or ZIP code</label>
+      <div class="search-row">
+        <input id="location-input" type="search" autocomplete="off" required>
+        <button type="submit" class="control">Search</button>
+      </div>
+    </form>
+    <p id="location-message" role="status"></p>
+    <ul id="location-results"></ul>
+    <button type="button" class="control" id="location-close">Close</button>
+  </dialog>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

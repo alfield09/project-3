@@ -180,3 +180,42 @@ body { font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif; font-s
 }
 
 .condition { border-top-width: 2.5px; }
+
+/* Location picker dialog: bottom sheet on phone for one-handed reach */
+dialog {
+  width: min(32rem, 100%);
+  max-height: 85dvh;
+  margin: auto auto 0;
+  padding: var(--gap);
+  color: var(--ink);
+  background: var(--paper);
+  border: 2.5px solid var(--line);
+  border-radius: 0.8rem 0.8rem 0 0;
+  overflow-y: auto;
+}
+
+dialog::backdrop { background: rgba(0, 0, 0, 0.4); }
+dialog h2 { margin: 0 0 var(--gap); font-size: 1.3rem; }
+dialog label { display: block; margin-bottom: 0.25rem; }
+dialog ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+dialog p { margin: var(--gap) 0 0.5rem; }
+
+.search-row { display: flex; gap: 0.5rem; }
+
+.search-row input {
+  flex: 1;
+  min-height: 44px;
+  padding: 0.4rem 0.7rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 0.6rem;
+}
+
+.result { width: 100%; justify-content: flex-start; text-align: left; }
+#location-close { margin-top: var(--gap); }
+
+@media (min-width: 900px) {
+  dialog { margin: auto; border-radius: 0.8rem; }
+}
