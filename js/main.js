@@ -41,7 +41,10 @@ let requestId = 0;        // lets a newer request ignore an older, slower one
 
 // ---------- Location ----------
 function showLocation() {
-  locationButton.textContent = currentLocation ? currentLocation.label : "Choose location";
+  const label = currentLocation ? currentLocation.label : "Choose location";
+  locationButton.textContent = label;
+  // accessible name keeps the visible text first, then says what the button does
+  locationButton.setAttribute("aria-label", currentLocation ? `${label}, change location` : label);
 }
 
 function chooseLocation(match) {
@@ -148,6 +151,8 @@ function renderDates() {
     stripButton.className = "control day";
     stripButton.setAttribute("aria-pressed", pressed);
     stripButton.append(date.weekday, document.createElement("br"), date.monthDay);
+    // explicit name: the line breaks above would otherwise run the words together for screen readers
+    stripButton.setAttribute("aria-label", `${date.weekday}, ${date.monthDay}${high != null ? `, high ${Math.round(high)} degrees` : ""}`);
     if (high != null) stripButton.append(document.createElement("br"), `${Math.round(high)}°F`);
     stripButton.addEventListener("click", () => chooseDate(date));
     forecastStrip.append(stripButton);
@@ -157,6 +162,7 @@ function renderDates() {
 function chooseDate(date) {
   selectedDate = date;
   dateButton.textContent = date.label;
+  dateButton.setAttribute("aria-label", `${date.label}, change date`);
   renderDates();
   renderWeather();
 }
