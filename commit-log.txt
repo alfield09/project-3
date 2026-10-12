@@ -1,0 +1,210 @@
+commit 739913b3b739d34f29ee3fd6665977b37381dc0c
+Date:   2026-10-12 15:41:31 -0500
+Author: mentalgarbage09
+
+Add debrief protocol as debrief.md
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit ce62cc85c9d22525627a9fb132dfc6a6d82da551
+Date:   2026-10-12 15:32:50 -0500
+Author: mentalgarbage09
+
+Save build transcript
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit c790b9b3911e8ba83fe6799be9e991655c142bdd
+Date:   2026-10-12 15:26:15 -0500
+Author: mentalgarbage09
+
+Add usability-test setup and session-note template to plan
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit b7ab448629391d5127fb40386ed71f70d6e25186
+Date:   2026-10-12 14:14:20 -0500
+Author: mentalgarbage09
+
+Credit ChatGPT for AI-generated art on info screen
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 8143bc84398a6785ad4fd7082c899cae33351b96
+Date:   2026-10-12 14:13:21 -0500
+Author: mentalgarbage09
+
+Add AI-generated art and wire it to the recommendation state
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 45c4fff79b783d4d37fec8c0a1b0c2bcea4b958b
+Date:   2026-10-12 14:01:41 -0500
+Author: mentalgarbage09
+
+Accessibility pass: non-color selected state, landmarks, accessible names, larger small text
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit bedb78265aaf18960e61f5cbd59ec56f807e97bb
+Date:   2026-10-12 13:59:10 -0500
+Author: mentalgarbage09
+
+Write info screen content with Open-Meteo CC BY credit, methodology, privacy, and font license
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 83d87ce3a4892b7504c0dbbe78474659961a6771
+Date:   2026-10-12 12:16:03 -0500
+Author: mentalgarbage09
+
+Add hidden Halloween outfit: double-tap, double-click, or Enter/Space twice
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit dd5dd0d1421b9efef80d29ff22d49a4c5e900be3
+Date:   2026-10-12 11:50:21 -0500
+Author: mentalgarbage09
+
+Add recommendation state, per-date stored variations, and drafted wording pools
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 799d748d023a27ed3da4a2081eba666db33907cd
+Date:   2026-10-12 11:47:39 -0500
+Author: mentalgarbage09
+
+Fetch live Open-Meteo forecast with loading, error/retry, and missing-data states
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit de0b999c302202d1d9264f2f3fba9274649d96e3
+Date:   2026-10-12 11:00:02 -0500
+Author: mentalgarbage09
+
+Add date selection: today plus 7 forecast days via picker and laptop strip
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit e3cdbfdedb978ad96513a31f7e0163112b214b42
+Date:   2026-10-11 16:54:37 -0500
+Author: mentalgarbage09
+
+Add device geolocation on explicit tap with denied/unavailable fallbacks
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 9ff265689e0d289204d0c678d7fd62561339eaa7
+Date:   2026-10-11 16:52:53 -0500
+Author: mentalgarbage09
+
+Add manual location entry with US geocoding picker and saved location
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit f580b056244c1b550713e8de7f17e8dcadc38572
+Date:   2026-10-11 16:50:49 -0500
+Author: mentalgarbage09
+
+Tick static layout checkpoints after Developer review
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit be6de85b07853c580e6797e082a9fd32ff16b758
+Date:   2026-10-11 16:49:57 -0500
+Author: mentalgarbage09
+
+Build static info screen layout
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 80c66fbf777230217faeefd0b8bc9b21adb29fa9
+Date:   2026-10-11 16:48:47 -0500
+Author: mentalgarbage09
+
+Add hand-drawn styling: Patrick Hand font, wobbled borders, sketched placeholder character
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 3611771fb1828558f0c9b5390595980cda54bfe5
+Date:   2026-10-11 16:45:33 -0500
+Author: mentalgarbage09
+
+Build static laptop layout of main screen with 7-day strip
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 8af929fb9b123290074ee701ce7ba171ddb8fc74
+Date:   2026-10-11 16:44:14 -0500
+Author: mentalgarbage09
+
+Build static phone layout of main screen with placeholder character
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 80ae8a7baf22ec2a01a9a812f11af80e7e378bbb
+Date:   2026-10-11 16:39:38 -0500
+Author: mentalgarbage09
+
+Scaffold static site and verify Open-Meteo fields
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 44650db848c015d3ebe1893ea917e316b50c7a86
+Date:   2026-10-11 16:38:49 -0500
+Author: mentalgarbage09
+
+Approve research, spec, and plan; align plan with final spec
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 04382168753129184323a098328a1d0e9cdb772e
+Date:   2026-10-11 16:33:18 -0500
+Author: mentalgarbage09
+
+Finalize spec: temperature source, feels-like proxy, band edges, error cases, accessibility, easter egg keyboard route
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+----------------------------------------
+commit 13baab3c8323a9513619e6ce9ef21425d2e2d84c
+Date:   2026-10-04 17:56:25 -0500
+Author: mentalgarbage09
+
+plan transcript
+
+----------------------------------------
+commit 8a1365cbbbc076eb1830cda87a35e51bf4c93ac0
+Date:   2026-10-04 17:53:25 -0500
+Author: mentalgarbage09
+
+phase 1 commit
+
+----------------------------------------
+commit df74ddfaf2bc9616fb5d4c5a714912e867355711
+Date:   2026-10-04 17:32:23 -0500
+Author: mentalgarbage09
+
+intial commit
+
+----------------------------------------
