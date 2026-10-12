@@ -27,7 +27,9 @@ const statusEl = document.getElementById("status");
 const retryButton = document.getElementById("retry-button");
 const recommendationEl = document.getElementById("recommendation");
 const remindersEl = document.getElementById("reminders");
-const characterArt = document.querySelector(".character-art");
+const characterPanel = document.querySelector(".character");
+const normalArt = document.getElementById("normal-art");
+const halloweenArt = document.getElementById("halloween-art");
 const outfitCaption = document.getElementById("outfit-caption");
 
 // ---------- State ----------
@@ -233,11 +235,6 @@ function renderWeather(failure) {
 
 retryButton.addEventListener("click", loadForecast);
 
-// ---------- Start ----------
-showLocation();
-chooseDate(selectedDate);
-loadForecast();
-
 // ---------- Recommendation ----------
 // One state object drives the character, written text, and reminders, so they always agree (Req 4).
 function renderRecommendation(day) {
@@ -250,9 +247,9 @@ function renderRecommendation(day) {
 
   // Placeholder art: the real outfit images will be chosen by outfitCategory + outfitVariantIndex
   const outfit = `${category} outfit ${state.outfitVariantIndex + 1} of 3`;
-  characterArt.setAttribute("aria-label", `Placeholder character wearing ${outfit}`);
-  outfitCaption.textContent = `${outfit} (placeholder art)`;
-  characterArt.parentElement.dataset.outfit = `${state.outfitCategory}-${state.outfitVariantIndex}`;
+  outfitDescription = outfit;
+  characterPanel.dataset.outfit = `${state.outfitCategory}-${state.outfitVariantIndex}`;
+  renderCharacter();
 
   remindersEl.replaceChildren();
   for (const reminder of state.reminders) {
@@ -272,7 +269,56 @@ function renderRecommendation(day) {
 // Clears the written outputs so nothing stale shows while loading or after an error
 function clearRecommendation() {
   recommendationEl.textContent = "";
-  outfitCaption.textContent = "";
+  outfitDescription = "";
+  renderCharacter();
   remindersEl.replaceChildren();
   remindersEl.hidden = true;
 }
+
+// ---------- Hidden Halloween outfit (Req 14) ----------
+// A double-action toggles it: double-tap (touch), double-click (mouse), or Enter/Space twice
+// while the character is focused. A reload resets it; changing date or location does not.
+const DOUBLE_ACTION_MS = 500;
+let halloween = false;
+let outfitDescription = "";   // set by renderRecommendation, e.g. "Hot outfit 2 of 3"
+let lastActionAt = 0;
+
+// Shows the normal outfit art or the Halloween art, with a matching caption
+function renderCharacter() {
+  // SVG elements have no .hidden property, so toggle the attribute
+  normalArt.toggleAttribute("hidden", halloween);
+  halloweenArt.toggleAttribute("hidden", !halloween);
+  if (halloween) {
+    outfitCaption.textContent = "Halloween outfit (placeholder art)";
+  } else {
+    normalArt.setAttribute("aria-label", `Placeholder character wearing ${outfitDescription}`);
+    outfitCaption.textContent = outfitDescription ? `${outfitDescription} (placeholder art)` : "";
+  }
+}
+
+// Two actions within 500 ms count as one double-action
+function registerAction(now = Date.now()) {
+  if (now - lastActionAt <= DOUBLE_ACTION_MS) {
+    halloween = !halloween;
+    renderCharacter();
+    lastActionAt = 0;
+  } else {
+    lastActionAt = now;
+  }
+}
+
+// click covers mouse and touch taps; keydown covers keyboard users
+characterPanel.addEventListener("click", () => registerAction());
+characterPanel.addEventListener("keydown", (event) => {
+  if (event.target !== characterPanel || event.repeat) return;
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault(); // Space would otherwise scroll the page
+    registerAction();
+  }
+});
+
+// ---------- Start ----------
+// Last, so every module-level variable above is initialized before the first render
+showLocation();
+chooseDate(selectedDate);
+loadForecast();

@@ -31,8 +31,8 @@
     </section>
 
     <!-- Character is the focus of the screen -->
-    <section class="character" aria-label="Outfit recommendation">
-      <svg class="character-art" role="img" aria-label="Placeholder character in a light outfit" viewBox="0 0 200 260">
+    <section class="character" role="group" tabindex="0" aria-label="Outfit recommendation">
+      <svg class="character-art" id="normal-art" role="img" aria-label="Placeholder character in a light outfit" viewBox="0 0 200 260">
         <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
           <!-- head, hair, face -->
           <path d="M100 18 C132 16 140 52 118 70 C100 82 70 74 68 48 C66 30 82 20 100 18 Z"/>
@@ -47,7 +47,17 @@
           <path d="M66 242 L96 242 M104 242 L134 242"/>
         </g>
       </svg>
-      <p class="outfit-caption" id="outfit-caption"></p>
+      <!-- Hidden Halloween outfit (placeholder art): friendly bedsheet ghost -->
+      <svg class="character-art" id="halloween-art" hidden role="img" aria-label="Placeholder character in a Halloween ghost costume" viewBox="0 0 200 260">
+        <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
+          <path d="M100 22 C60 22 46 56 48 96 L44 238 L62 224 L78 242 L96 226 L114 242 L132 224 L152 238 L152 96 C154 56 140 22 100 22 Z"/>
+          <path d="M80 80 a6 9 0 1 0 0.1 0 M120 80 a6 9 0 1 0 0.1 0"/>
+          <path d="M88 112 Q100 124 112 112"/>
+          <path d="M48 140 Q30 150 36 168 M152 140 Q170 150 164 168"/>
+          <path d="M70 244 L96 244 M104 244 L130 244" stroke-width="3"/>
+        </g>
+      </svg>
+      <p class="outfit-caption" id="outfit-caption" aria-live="polite"></p>
     </section>
 
     <p class="recommendation" id="recommendation"></p>
