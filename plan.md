@@ -119,13 +119,39 @@ Before testing, record the purpose, a few realistic tasks, non-leading prompts, 
 
 **Note format per session:** tester label (e.g., P1/P2/P3), task, what they did/said (observation), success or barrier (fact), possible change (interpretation, kept separate from the observation).
 
+**Setup (fill in before the first session):**
+- Build tested: https://alfield09.github.io/project-3-template/ (commit: ____)
+- Device and browser per tester: P1 ____ / P2 ____ / P3 ____ (include at least one phone and one laptop)
+- Hand each tester the phone/laptop with the app already open and no location saved, or clear the saved location first, so Task 3 starts the same way for everyone.
+- Don't mention the Halloween outfit. After the four tasks, ask each tester: "Was there anything on the screen you weren't sure about?" Record whether anyone found it on their own.
+
+**Session notes** (one block per tester; keep observations and interpretations separate)
+
+*P1 (device: ____)*
+| Task | What they did / said (observation) | Success or barrier (fact) | Possible change (interpretation) |
+|---|---|---|---|
+| 1. What to wear today, and why | | | |
+| 2. A date 3–4 days out | | | |
+| 3. Change the location | | | |
+| 4. Where the weather data comes from | | | |
+| Anything unsure? / found Halloween? | | | |
+
+*P2 (device: ____)* — same table
+
+*P3 (device: ____)* — same table
+
+**Findings across all three sessions** (fill in after the sessions; the strongest findings first)
+1. ____
+
+**Chosen improvement and why:** ____ (add it to the Build checklist, and update `spec.md` if the intended result changes)
+
 ## Revisions
 
 Record material plan changes and why they were made.
 
 - 2026-10-12: Art generated with ChatGPT (OpenAI) and wired in; the info screen credits it. OpenAI's terms (checked 2026-10-12) give the user ownership of output and allow commercial use, provided output is not presented as human-made, which the info-screen disclosure covers. Specific image model/version not recorded.
 - 2026-10-12: Accessibility pass (measured in headless Edge). Fixed: selected day was shown by color only (1.07:1), so it now has a checkmark and heavier border; added a main landmark and hidden h1; gave the location, date, and strip buttons accessible names; raised the smallest text from 13.6px to 15.2px. Passed: text contrast 6.1-13.6:1, all targets at least 44x44 on both sizes and in both dialogs, no horizontal overflow. Known: on a 360x640 phone the page scrolls by 74px; on laptop the Info button is last in tab order though it sits top-right. Not yet done: real screen reader, keyboard-only run on a real browser, 200% zoom.
-- 2026-10-12: Info screen content written. Open-Meteo data is CC BY 4.0 (credited with a license link); its free API is for non-commercial use only, so a commercial launch by the Client would need a paid Open-Meteo plan. The AI art tool is not named yet: add it to the Art credits section of `info.html` (see the TODO there) when the real art is swapped in.
+- 2026-10-12: Info screen content written. Open-Meteo data is CC BY 4.0 (credited with a license link); its free API is for non-commercial use only, so a commercial launch by the Client would need a paid Open-Meteo plan. (The art tool was named later; see the entry above.)
 - 2026-10-11: Aligned the plan with the finalized spec (feels-like temperature, band edges, Req 10a/13a/16, Halloween keyboard route, rolled-once-and-stored variations). Moved the first deploy to right after the scaffold so GitHub Pages/HTTPS problems surface early, and added an Open-Meteo field check before layout work.
 
 ## Saving transcripts
