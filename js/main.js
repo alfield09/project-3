@@ -3,7 +3,9 @@ import { searchLocations, fetchForecast, describeWeather } from "./weather.js";
 import { loadLocation, saveLocation, loadVariants, saveVariants, variantKey } from "./storage.js";
 import { getSelectableDates } from "./dates.js";
 import { buildRecommendation } from "./recommendation.js";
-import { CATEGORY_LABELS, RECOMMENDATION_TEXT, REMINDER_TEXT } from "./content.js";
+import {
+  RECOMMENDATION_TEXT, REMINDER_TEXT, OUTFIT_DESCRIPTIONS, HALLOWEEN_DESCRIPTION, BASE_DESCRIPTION,
+} from "./content.js";
 
 // ---------- Elements ----------
 const locationButton = document.getElementById("location-button");
@@ -28,9 +30,11 @@ const retryButton = document.getElementById("retry-button");
 const recommendationEl = document.getElementById("recommendation");
 const remindersEl = document.getElementById("reminders");
 const characterPanel = document.querySelector(".character");
-const normalArt = document.getElementById("normal-art");
-const halloweenArt = document.getElementById("halloween-art");
-const outfitCaption = document.getElementById("outfit-caption");
+const characterArt = document.getElementById("character-art");
+const announcer = document.getElementById("outfit-announcer");
+const weatherIcon = document.getElementById("weather-icon");
+const locationLabel = document.getElementById("location-label");
+const dateLabel = document.getElementById("date-label");
 
 // ---------- State ----------
 let currentLocation = loadLocation();
@@ -42,7 +46,7 @@ let requestId = 0;        // lets a newer request ignore an older, slower one
 // ---------- Location ----------
 function showLocation() {
   const label = currentLocation ? currentLocation.label : "Choose location";
-  locationButton.textContent = label;
+  locationLabel.textContent = label;
   // accessible name keeps the visible text first, then says what the button does
   locationButton.setAttribute("aria-label", currentLocation ? `${label}, change location` : label);
 }
@@ -161,7 +165,7 @@ function renderDates() {
 
 function chooseDate(date) {
   selectedDate = date;
-  dateButton.textContent = date.label;
+  dateLabel.textContent = date.label;
   dateButton.setAttribute("aria-label", `${date.label}, change date`);
   renderDates();
   renderWeather();
@@ -242,64 +246,76 @@ function renderWeather(failure) {
 retryButton.addEventListener("click", loadForecast);
 
 // ---------- Recommendation ----------
-// One state object drives the character, written text, and reminders, so they always agree (Req 4).
+// One state object drives the character, weather icon, written text, and reminders, so they
+// always agree (Req 4).
 function renderRecommendation(day) {
   const key = variantKey(currentLocation, day.iso);
   const { state, variants } = buildRecommendation(day, loadVariants(key));
   saveVariants(key, variants, forecast.today);
 
-  const category = CATEGORY_LABELS[state.outfitCategory];
   recommendationEl.textContent = RECOMMENDATION_TEXT[state.outfitCategory][state.textVariantIndex];
 
-  // Placeholder art: the real outfit images will be chosen by outfitCategory + outfitVariantIndex
-  const outfit = `${category} outfit ${state.outfitVariantIndex + 1} of 3`;
-  outfitDescription = outfit;
-  characterPanel.dataset.outfit = `${state.outfitCategory}-${state.outfitVariantIndex}`;
+  outfit = { category: state.outfitCategory, variantIndex: state.outfitVariantIndex };
   renderCharacter();
+
+  // The condition text beside the icon already says the weather, so the icon is decorative
+  if (state.conditionCode == null) {
+    weatherIcon.hidden = true;
+  } else {
+    weatherIcon.src = `assets/weather-${describeWeather(state.conditionCode).group}.png`;
+    weatherIcon.hidden = false;
+  }
 
   remindersEl.replaceChildren();
   for (const reminder of state.reminders) {
     const row = document.createElement("p");
     row.className = "reminder";
     row.dataset.type = reminder.type;
-    const icon = document.createElement("span");
+    const icon = document.createElement("img");
     icon.className = "reminder-icon";
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = "⚠";
+    icon.src = `assets/reminder-${reminder.type}.png`;
+    icon.alt = "";
+    icon.width = 40;
+    icon.height = 40;
     row.append(icon, REMINDER_TEXT[reminder.type][reminder.wordingVariantIndex]);
     remindersEl.append(row);
   }
   remindersEl.hidden = state.reminders.length === 0;
 }
 
-// Clears the written outputs so nothing stale shows while loading or after an error
+// Clears the outputs so nothing stale shows while loading or after an error
 function clearRecommendation() {
   recommendationEl.textContent = "";
-  outfitDescription = "";
+  outfit = null;
   renderCharacter();
+  weatherIcon.hidden = true;
   remindersEl.replaceChildren();
   remindersEl.hidden = true;
 }
 
-// ---------- Hidden Halloween outfit (Req 14) ----------
-// A double-action toggles it: double-tap (touch), double-click (mouse), or Enter/Space twice
-// while the character is focused. A reload resets it; changing date or location does not.
+// ---------- Character art and the hidden Halloween outfit (Req 14) ----------
+// A double-action toggles the Halloween outfit: double-tap (touch), double-click (mouse), or
+// Enter/Space twice while the character is focused. A reload resets it; changing date or
+// location does not.
 const DOUBLE_ACTION_MS = 500;
 let halloween = false;
-let outfitDescription = "";   // set by renderRecommendation, e.g. "Hot outfit 2 of 3"
+let outfit = null;            // { category, variantIndex } from the recommendation, or null
 let lastActionAt = 0;
 
-// Shows the normal outfit art or the Halloween art, with a matching caption
+// Picks the image: Halloween, else the recommended outfit, else the plain base character
+// (shown before any weather has loaded)
 function renderCharacter() {
-  // SVG elements have no .hidden property, so toggle the attribute
-  normalArt.toggleAttribute("hidden", halloween);
-  halloweenArt.toggleAttribute("hidden", !halloween);
+  let src = "assets/character-base.png";
+  let description = BASE_DESCRIPTION;
   if (halloween) {
-    outfitCaption.textContent = "Halloween outfit (placeholder art)";
-  } else {
-    normalArt.setAttribute("aria-label", `Placeholder character wearing ${outfitDescription}`);
-    outfitCaption.textContent = outfitDescription ? `${outfitDescription} (placeholder art)` : "";
+    src = "assets/outfit-halloween.png";
+    description = HALLOWEEN_DESCRIPTION;
+  } else if (outfit) {
+    src = `assets/outfit-${outfit.category}-${outfit.variantIndex + 1}.png`;
+    description = OUTFIT_DESCRIPTIONS[outfit.category][outfit.variantIndex];
   }
+  characterArt.src = src;
+  characterArt.alt = `Character wearing ${description}`;
 }
 
 // Two actions within 500 ms count as one double-action
@@ -307,6 +323,7 @@ function registerAction(now = Date.now()) {
   if (now - lastActionAt <= DOUBLE_ACTION_MS) {
     halloween = !halloween;
     renderCharacter();
+    announcer.textContent = halloween ? "Halloween outfit on" : "Halloween outfit off";
     lastActionAt = 0;
   } else {
     lastActionAt = now;

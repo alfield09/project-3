@@ -18,13 +18,16 @@
     <h1 class="visually-hidden">WeatherFit</h1>
     <!-- Top bar: location (left) and date (right) controls -->
     <header class="top-bar">
-      <button type="button" class="control" id="location-button" aria-haspopup="dialog">Austin, TX</button>
-      <button type="button" class="control" id="date-button" aria-haspopup="dialog">Today</button>
+      <button type="button" class="control" id="location-button" aria-haspopup="dialog"><img class="icon" src="assets/ui-location.png" alt="" width="24" height="24"><span id="location-label">Choose location</span></button>
+      <button type="button" class="control" id="date-button" aria-haspopup="dialog"><img class="icon" src="assets/ui-calendar.png" alt="" width="24" height="24"><span id="date-label">Today</span></button>
     </header>
 
     <!-- Temperature, condition, and context line (Req 16) -->
     <section class="conditions" aria-label="Weather conditions">
-      <p class="temp" id="temp">--°F</p>
+      <div class="temp-row">
+        <img class="weather-icon" id="weather-icon" alt="" width="64" height="64" hidden>
+        <p class="temp" id="temp">--°F</p>
+      </div>
       <p class="condition" id="condition">--</p>
       <p class="context" id="context">Today (current) · Weather: Open-Meteo</p>
       <p class="status" id="status" role="status"></p>
@@ -33,32 +36,8 @@
 
     <!-- Character is the focus of the screen -->
     <section class="character" role="group" tabindex="0" aria-label="Outfit recommendation">
-      <svg class="character-art" id="normal-art" role="img" aria-label="Placeholder character in a light outfit" viewBox="0 0 200 260">
-        <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
-          <!-- head, hair, face -->
-          <path d="M100 18 C132 16 140 52 118 70 C100 82 70 74 68 48 C66 30 82 20 100 18 Z"/>
-          <path d="M72 38 C84 24 112 24 128 38"/>
-          <path d="M88 48 v4 M112 48 v4"/>
-          <path d="M90 62 Q100 70 110 62"/>
-          <!-- light layer: loose top with sleeves -->
-          <path d="M78 84 C90 90 110 90 122 84 L152 108 L140 130 L124 118 L126 168 L74 168 L76 118 L60 130 L48 108 Z"/>
-          <!-- comfy pants -->
-          <path d="M74 168 L70 238 L94 238 L100 190 L106 238 L130 238 L126 168"/>
-          <!-- shoes -->
-          <path d="M66 242 L96 242 M104 242 L134 242"/>
-        </g>
-      </svg>
-      <!-- Hidden Halloween outfit (placeholder art): friendly bedsheet ghost -->
-      <svg class="character-art" id="halloween-art" hidden role="img" aria-label="Placeholder character in a Halloween ghost costume" viewBox="0 0 200 260">
-        <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
-          <path d="M100 22 C60 22 46 56 48 96 L44 238 L62 224 L78 242 L96 226 L114 242 L132 224 L152 238 L152 96 C154 56 140 22 100 22 Z"/>
-          <path d="M80 80 a6 9 0 1 0 0.1 0 M120 80 a6 9 0 1 0 0.1 0"/>
-          <path d="M88 112 Q100 124 112 112"/>
-          <path d="M48 140 Q30 150 36 168 M152 140 Q170 150 164 168"/>
-          <path d="M70 244 L96 244 M104 244 L130 244" stroke-width="3"/>
-        </g>
-      </svg>
-      <p class="outfit-caption" id="outfit-caption" aria-live="polite"></p>
+      <img class="character-art" id="character-art" src="assets/character-base.png" alt="Character wearing a plain sweater and gray pants" width="1024" height="1365">
+      <p class="visually-hidden" id="outfit-announcer" aria-live="polite"></p>
     </section>
 
     <p class="recommendation" id="recommendation"></p>
@@ -70,7 +49,7 @@
     <nav class="forecast-strip" id="forecast-strip" aria-label="7-day forecast"></nav>
 
     <footer class="bottom-bar">
-      <a class="control info-link" href="info.html" aria-label="Info">(i) Info</a>
+      <a class="control info-link" href="info.html"><img class="icon" src="assets/ui-info.png" alt="" width="24" height="24"><span>Info</span></a>
     </footer>
   </main>
   <!-- Date picker: today plus 7 forecast days -->

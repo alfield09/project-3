@@ -42,3 +42,30 @@ export const REMINDER_TEXT = {
     "Heat alert: sip water throughout the day.",
   ],
 };
+
+// Alt text for the outfit art, one per image (matches assets/outfit-<category>-<1..3>.png)
+export const OUTFIT_DESCRIPTIONS = {
+  cold: [
+    "a green puffer jacket, beanie, scarf, and gloves",
+    "a long blue wool coat, beanie, and boots",
+    "a hooded purple parka, earmuffs, and boots",
+  ],
+  cool: [
+    "a denim jacket over a tee with jeans",
+    "a peach sweater and joggers",
+    "a plaid overshirt over a hoodie, with a beanie",
+  ],
+  mild: [
+    "a green long-sleeve top and jeans",
+    "a lavender cardigan over a tee",
+    "a blue and cream windbreaker and joggers",
+  ],
+  hot: [
+    "a green tank top, cream shorts, sandals, and sunglasses",
+    "a peach tee, denim shorts, and a cap",
+    "a white tee and lavender athletic shorts",
+  ],
+};
+
+export const HALLOWEEN_DESCRIPTION = "a lavender witch hat and cape";
+export const BASE_DESCRIPTION = "a plain sweater and gray pants";
