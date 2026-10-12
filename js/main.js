@@ -1,6 +1,7 @@
 // Wires up the main screen UI.
 import { searchLocations } from "./weather.js";
 import { loadLocation, saveLocation } from "./storage.js";
+import { getSelectableDates } from "./dates.js";
 
 const locationButton = document.getElementById("location-button");
 const dialog = document.getElementById("location-dialog");
@@ -97,3 +98,52 @@ function showGeolocationProblem(text) {
   message.textContent = text;
   input.focus();
 }
+
+// Date selection: today plus 7 forecast days. The chosen date is not saved (only the location is).
+const dateButton = document.getElementById("date-button");
+const dateDialog = document.getElementById("date-dialog");
+const dateList = document.getElementById("date-list");
+const forecastStrip = document.getElementById("forecast-strip");
+const contextLine = document.getElementById("context");
+
+const dates = getSelectableDates();
+let selectedDate = dates[0];
+
+// Builds one button per selectable date in both the picker and the laptop strip.
+function renderDates() {
+  dateList.replaceChildren();
+  forecastStrip.replaceChildren();
+  for (const date of dates) {
+    const pressed = String(date.iso === selectedDate.iso);
+
+    const pickerButton = document.createElement("button");
+    pickerButton.type = "button";
+    pickerButton.className = "control result";
+    pickerButton.textContent = date.label;
+    pickerButton.setAttribute("aria-pressed", pressed);
+    pickerButton.addEventListener("click", () => { chooseDate(date); dateDialog.close(); });
+    const item = document.createElement("li");
+    item.append(pickerButton);
+    dateList.append(item);
+
+    const stripButton = document.createElement("button");
+    stripButton.type = "button";
+    stripButton.className = "control day";
+    stripButton.setAttribute("aria-pressed", pressed);
+    stripButton.append(date.weekday, document.createElement("br"), date.monthDay);
+    stripButton.addEventListener("click", () => chooseDate(date));
+    forecastStrip.append(stripButton);
+  }
+}
+
+function chooseDate(date) {
+  selectedDate = date;
+  dateButton.textContent = date.label;
+  // Req 16: say whether conditions are current or forecast
+  contextLine.textContent = `${date.isToday ? "Today (current)" : "Forecast"} · Weather: Open-Meteo`;
+  renderDates();
+}
+
+dateButton.addEventListener("click", () => dateDialog.showModal());
+document.getElementById("date-close").addEventListener("click", () => dateDialog.close());
+chooseDate(selectedDate);

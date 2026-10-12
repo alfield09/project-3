@@ -25,7 +25,7 @@
     <section class="conditions" aria-label="Weather conditions">
       <p class="temp">72°F</p>
       <p class="condition">Partly cloudy</p>
-      <p class="context">Today (current) · Weather: Open-Meteo</p>
+      <p class="context" id="context">Today (current) · Weather: Open-Meteo</p>
     </section>
 
     <!-- Character is the focus of the screen -->
@@ -55,21 +55,19 @@
     </div>
 
     <!-- 7-day forecast strip: laptop layout only (hidden on phone) -->
-    <nav class="forecast-strip" aria-label="7-day forecast">
-      <button type="button" class="control day" aria-pressed="true">Today<br>72°F</button>
-      <button type="button" class="control day" aria-pressed="false">Mon<br>75°F</button>
-      <button type="button" class="control day" aria-pressed="false">Tue<br>68°F</button>
-      <button type="button" class="control day" aria-pressed="false">Wed<br>61°F</button>
-      <button type="button" class="control day" aria-pressed="false">Thu<br>55°F</button>
-      <button type="button" class="control day" aria-pressed="false">Fri<br>52°F</button>
-      <button type="button" class="control day" aria-pressed="false">Sat<br>58°F</button>
-      <button type="button" class="control day" aria-pressed="false">Sun<br>64°F</button>
-    </nav>
+    <nav class="forecast-strip" id="forecast-strip" aria-label="7-day forecast"></nav>
 
     <footer class="bottom-bar">
       <a class="control info-link" href="info.html" aria-label="Info">(i) Info</a>
     </footer>
   </div>
+  <!-- Date picker: today plus 7 forecast days -->
+  <dialog id="date-dialog" aria-labelledby="date-title">
+    <h2 id="date-title">Choose a day</h2>
+    <ul id="date-list"></ul>
+    <button type="button" class="control" id="date-close">Close</button>
+  </dialog>
+
   <!-- Location picker: search a US city or ZIP, then choose a match (city shown with state) -->
   <dialog id="location-dialog" aria-labelledby="location-title">
     <h2 id="location-title">Choose a US location</h2>

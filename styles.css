@@ -112,7 +112,8 @@ body {
 /* Forecast strip is laptop-only */
 .forecast-strip { display: none; }
 
-.day[aria-pressed="true"] { background: var(--accent-bg); }
+.day[aria-pressed="true"],
+.result[aria-pressed="true"] { background: var(--accent-bg); }
 
 /* Main screen, laptop: left text column, character center, reminder right, 7-day strip along the bottom */
 @media (min-width: 900px) {
