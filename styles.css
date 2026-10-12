@@ -107,6 +107,7 @@ body {
 .info section { margin-top: 1.5rem; }
 .info h2 { margin: 0 0 0.25rem; font-size: 1.3rem; }
 .info p { margin: 0.25rem 0; }
+.info ul { margin: 0.25rem 0; padding-left: 1.4rem; }
 .info a:not(.control) { color: #0b57d0; text-decoration: underline; }
 .info-title { margin: 0; font-size: 1.6rem; font-weight: 400; }
 

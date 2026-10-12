@@ -123,6 +123,7 @@ Before testing, record the purpose, a few realistic tasks, non-leading prompts, 
 
 Record material plan changes and why they were made.
 
+- 2026-10-12: Info screen content written. Open-Meteo data is CC BY 4.0 (credited with a license link); its free API is for non-commercial use only, so a commercial launch by the Client would need a paid Open-Meteo plan. The AI art tool is not named yet: add it to the Art credits section of `info.html` (see the TODO there) when the real art is swapped in.
 - 2026-10-11: Aligned the plan with the finalized spec (feels-like temperature, band edges, Req 10a/13a/16, Halloween keyboard route, rolled-once-and-stored variations). Moved the first deploy to right after the scaffold so GitHub Pages/HTTPS problems surface early, and added an Open-Meteo field check before layout work.
 
 ## Saving transcripts

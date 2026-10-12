@@ -28,23 +28,60 @@
 
     <section>
       <h2>Weather data</h2>
-      <p>Weather data from <a href="https://open-meteo.com/">Open-Meteo</a>.</p>
+      <p>
+        Weather data by <a href="https://open-meteo.com/">Open-Meteo.com</a>, licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+        Place search also uses Open-Meteo. The app shows today and the next 7 days, in &deg;F.
+        Values are used as provided; the app only rounds temperatures to whole degrees.
+      </p>
     </section>
 
     <section>
       <h2>How recommendations work</h2>
-      <p>The outfit comes from the temperature band, and reminders appear for UV, chance of rain (PoP), and feels-like temperature. Placeholder summary; final wording to come.</p>
-      <p><a href="https://github.com/alfield09/project-3-template/blob/main/research.md">Read the methodology and sources</a></p>
+      <p>
+        The outfit comes from the day's temperature: today's current temperature, or the
+        daily high for a future day.
+      </p>
+      <ul>
+        <li>Cold: 44&deg;F or below</li>
+        <li>Cool: 45&ndash;59&deg;F</li>
+        <li>Mild: 60&ndash;74&deg;F</li>
+        <li>Hot: 75&deg;F or above</li>
+      </ul>
+      <p>Reminders appear when conditions call for them:</p>
+      <ul>
+        <li>Umbrella: chance of precipitation of 40% or more</li>
+        <li>Sunscreen: UV index of 3 or more</li>
+        <li>Hydration: feels-like temperature of 90&deg;F or more</li>
+      </ul>
+      <p>
+        The hydration reminder uses Open-Meteo's feels-like (apparent) temperature as a stand-in
+        for the National Weather Service heat index, which Open-Meteo doesn't provide.
+        These ranges are general guidelines and don't account for how warm or cold you run.
+      </p>
+      <p>
+        <a href="https://github.com/alfield09/project-3-template/blob/main/research.md#weather-and-technical-evidence">Read the methodology and sources</a>
+      </p>
     </section>
 
     <section>
       <h2>Privacy</h2>
-      <p>Your location is saved on this device only.</p>
+      <p>
+        Your most recent location is saved on this device only, along with the outfit and wording
+        choices for the days you've viewed. It is never sent to a server of ours, because there isn't one.
+        To get weather, the place you search for or your coordinates are sent to Open-Meteo.
+        Your device location is requested only when you tap "Use my location".
+      </p>
     </section>
 
     <section>
       <h2>Art credits</h2>
-      <p>Art is AI-generated.</p>
+      <!-- TODO (plan: swap in real art): name the AI tool used to generate the artwork here -->
+      <p>The character, outfits, and icons are AI-generated.</p>
+      <p>
+        Handwriting font: Patrick Hand by Patrick Wagesreiter, from Google Fonts, under the
+        <a href="https://openfontlicense.org/">SIL Open Font License</a>.
+      </p>
     </section>
   </main>
 </body>
