@@ -23,9 +23,11 @@
 
     <!-- Temperature, condition, and context line (Req 16) -->
     <section class="conditions" aria-label="Weather conditions">
-      <p class="temp">72°F</p>
-      <p class="condition">Partly cloudy</p>
+      <p class="temp" id="temp">--°F</p>
+      <p class="condition" id="condition">--</p>
       <p class="context" id="context">Today (current) · Weather: Open-Meteo</p>
+      <p class="status" id="status" role="status"></p>
+      <button type="button" class="control" id="retry-button" hidden>Try again</button>
     </section>
 
     <!-- Character is the focus of the screen -->

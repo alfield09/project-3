@@ -221,3 +221,12 @@ dialog p { margin: var(--gap) 0 0.5rem; }
 @media (min-width: 900px) {
   dialog { margin: auto; border-radius: 0.8rem; }
 }
+
+/* Loading / error / empty status under the conditions */
+.conditions .status { margin: 0.4rem 0 0; font-size: 1rem; }
+.conditions .status:empty { display: none; }
+.conditions[data-state="loading"] .temp,
+.conditions[data-state="loading"] .condition { opacity: 0.4; }
+.conditions[data-state="error"] .status { font-weight: 700; }
+#retry-button { margin-top: 0.4rem; }
+#retry-button[hidden] { display: none; }
