@@ -82,6 +82,7 @@ body {
 }
 
 .reminder {
+  margin: 0;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -139,7 +140,7 @@ body {
   .recommendation { grid-area: rec; align-self: start; text-align: left; font-size: 1.35rem; }
 
   .character { grid-area: character; min-height: 24rem; }
-  .reminder { grid-area: reminder; align-self: start; }
+  .reminders { grid-area: reminder; align-self: start; }
 
   .forecast-strip {
     grid-area: strip;
@@ -230,3 +231,12 @@ dialog p { margin: var(--gap) 0 0.5rem; }
 .conditions[data-state="error"] .status { font-weight: 700; }
 #retry-button { margin-top: 0.4rem; }
 #retry-button[hidden] { display: none; }
+
+/* Reminders stack when more than one applies; the container is hidden when none do */
+.reminders { display: grid; gap: 0.5rem; }
+.reminders[hidden] { display: none; }
+
+/* Character panel: art on top, placeholder caption underneath */
+.character { flex-direction: column; gap: 0.25rem; padding: 0.5rem; }
+.character-art { flex: 1 1 0; min-height: 0; }
+.outfit-caption { margin: 0; font-size: 0.9rem; }

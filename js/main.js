@@ -1,7 +1,9 @@
 // Wires up the main screen UI: location, date, and weather display.
 import { searchLocations, fetchForecast, describeWeather } from "./weather.js";
-import { loadLocation, saveLocation } from "./storage.js";
+import { loadLocation, saveLocation, loadVariants, saveVariants, variantKey } from "./storage.js";
 import { getSelectableDates } from "./dates.js";
+import { buildRecommendation } from "./recommendation.js";
+import { CATEGORY_LABELS, RECOMMENDATION_TEXT, REMINDER_TEXT } from "./content.js";
 
 // ---------- Elements ----------
 const locationButton = document.getElementById("location-button");
@@ -23,6 +25,10 @@ const conditionEl = document.getElementById("condition");
 const contextEl = document.getElementById("context");
 const statusEl = document.getElementById("status");
 const retryButton = document.getElementById("retry-button");
+const recommendationEl = document.getElementById("recommendation");
+const remindersEl = document.getElementById("reminders");
+const characterArt = document.querySelector(".character-art");
+const outfitCaption = document.getElementById("outfit-caption");
 
 // ---------- State ----------
 let currentLocation = loadLocation();
@@ -181,6 +187,7 @@ async function loadForecast() {
   const thisRequest = ++requestId;
   forecast = null;
   setStatus("loading", "Loading weather…"); // Req 9
+  clearRecommendation();
   tempEl.textContent = "--°F";
   conditionEl.textContent = "--";
 
@@ -199,6 +206,7 @@ async function loadForecast() {
 
 // Shows the selected date's weather, or the matching empty/error state.
 function renderWeather(failure) {
+  clearRecommendation();
   contextEl.textContent = `${selectedDate.isToday ? "Today (current)" : "Forecast"} · Weather: Open-Meteo`;
 
   if (!currentLocation) {
@@ -220,6 +228,7 @@ function renderWeather(failure) {
   setStatus("ready");
   tempEl.textContent = `${Math.round(day.temperature)}°F`;
   conditionEl.textContent = day.weatherCode == null ? "--" : describeWeather(day.weatherCode).label;
+  renderRecommendation(day);
 }
 
 retryButton.addEventListener("click", loadForecast);
@@ -228,3 +237,42 @@ retryButton.addEventListener("click", loadForecast);
 showLocation();
 chooseDate(selectedDate);
 loadForecast();
+
+// ---------- Recommendation ----------
+// One state object drives the character, written text, and reminders, so they always agree (Req 4).
+function renderRecommendation(day) {
+  const key = variantKey(currentLocation, day.iso);
+  const { state, variants } = buildRecommendation(day, loadVariants(key));
+  saveVariants(key, variants, forecast.today);
+
+  const category = CATEGORY_LABELS[state.outfitCategory];
+  recommendationEl.textContent = RECOMMENDATION_TEXT[state.outfitCategory][state.textVariantIndex];
+
+  // Placeholder art: the real outfit images will be chosen by outfitCategory + outfitVariantIndex
+  const outfit = `${category} outfit ${state.outfitVariantIndex + 1} of 3`;
+  characterArt.setAttribute("aria-label", `Placeholder character wearing ${outfit}`);
+  outfitCaption.textContent = `${outfit} (placeholder art)`;
+  characterArt.parentElement.dataset.outfit = `${state.outfitCategory}-${state.outfitVariantIndex}`;
+
+  remindersEl.replaceChildren();
+  for (const reminder of state.reminders) {
+    const row = document.createElement("p");
+    row.className = "reminder";
+    row.dataset.type = reminder.type;
+    const icon = document.createElement("span");
+    icon.className = "reminder-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "⚠";
+    row.append(icon, REMINDER_TEXT[reminder.type][reminder.wordingVariantIndex]);
+    remindersEl.append(row);
+  }
+  remindersEl.hidden = state.reminders.length === 0;
+}
+
+// Clears the written outputs so nothing stale shows while loading or after an error
+function clearRecommendation() {
+  recommendationEl.textContent = "";
+  outfitCaption.textContent = "";
+  remindersEl.replaceChildren();
+  remindersEl.hidden = true;
+}

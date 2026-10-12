@@ -47,14 +47,13 @@
           <path d="M66 242 L96 242 M104 242 L134 242"/>
         </g>
       </svg>
+      <p class="outfit-caption" id="outfit-caption"></p>
     </section>
 
-    <p class="recommendation" id="recommendation">A light layer and comfy pants will do it today.</p>
+    <p class="recommendation" id="recommendation"></p>
 
-    <div class="reminder" role="note">
-      <span class="reminder-icon" aria-hidden="true">⚠</span>
-      <span id="reminder-text">Reminder: put on sunscreen before heading out.</span>
-    </div>
+    <!-- Reminders, built from the recommendation state; hidden when none apply -->
+    <div class="reminders" id="reminders" role="note" hidden></div>
 
     <!-- 7-day forecast strip: laptop layout only (hidden on phone) -->
     <nav class="forecast-strip" id="forecast-strip" aria-label="7-day forecast"></nav>
